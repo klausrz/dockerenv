@@ -3,9 +3,9 @@ MAINTAINER Klaus <bondvodkamartini@gmail.com>
 
 CMD ["/sbin/my_init"]
 
-RUN apt-get update && apt-get install -y python-software-properties
-RUN add-apt-repository ppa:nginx/stable
-RUN apt-get update && apt-get install -y nginx
+RUN apt-get update && apt-get install -y \
+	nginx \
+	net-tools
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN ln -sf /dev/stdout /var/log/nginx/access.log

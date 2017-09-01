@@ -1,0 +1,25 @@
+web:
+  build: ./src/images/nginx
+  ports:
+    - "8080:80"
+  volumes:
+    - ./src:/var/www
+    - ./src/vhost.conf:/etc/nginx/sites-enabled/vhost.conf
+  links:
+    - php
+php:
+  image: ./src/images/php7  
+  volumes:    
+    - ./src:/var/www
+  links:
+    - db
+db:  
+  image: mysql
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+  volumes:
+   - ./src/database:/var/lib/mysql
+   - ./src:/var/www
+  
