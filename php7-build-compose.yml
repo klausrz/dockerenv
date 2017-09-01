@@ -1,5 +1,5 @@
 web:
-  build: ./src/images/nginx
+  build: ./images/nginx
   ports:
     - "8080:80"
   volumes:
@@ -8,7 +8,7 @@ web:
   links:
     - php
 php:
-  image: ./src/images/php7  
+  image: ./images/php7  
   volumes:    
     - ./src:/var/www
   links:
