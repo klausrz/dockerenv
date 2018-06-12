@@ -2,6 +2,7 @@ web:
   build: ./images/nginx/1.13.12
   ports:
     - "80:80"
+    - "9009:80"
   volumes:
     - /var/www:/var/www
     - ./config/nginx/conf.d:/etc/nginx/conf.d
@@ -18,9 +19,10 @@ db:
   ports:
    - "3306:3306"
   volumes:
-    - /var/mysql:/var/lib/mysql
+    - /data/mysql:/var/lib/mysql
   environment:
     MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: "%"
     MYSQL_DATABASE: test
     MYSQL_USER: test
     MYSQL_PASSWORD: test

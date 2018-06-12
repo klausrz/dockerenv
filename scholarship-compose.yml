@@ -1,0 +1,23 @@
+version: "2"
+services:
+  node:
+    build: ./images/node/8.11
+    user: "node"
+    working_dir: /var/www/scholarship
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /var/www/scholarship:/var/www/scholarship
+    expose:
+      - "8081"
+    links:
+      - mongo
+    command: "./shells/run-universal-express.sh"
+    
+  mongo:
+    build: ./images/mongo/3.6
+    volumes:
+      - /data/mongo:/data/db
+    ports:
+      - "27017:27017"
+
