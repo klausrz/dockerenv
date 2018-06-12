@@ -228,11 +228,15 @@ RUN apt-get update && apt-get install -y \
 		libjpeg62-dev \
 		libmcrypt-dev \
 		libpng-dev \
+		libicu-dev \
+		#g++ \
+		libxml2 \
 	&& docker-php-ext-install -j$(nproc) iconv mcrypt \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+#RUN docker-php-ext-configure intl
+RUN docker-php-ext-install mysqli pdo pdo_mysql intl zip
 EXPOSE 9000
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 CMD ["php-fpm"]
